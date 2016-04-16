@@ -35,8 +35,8 @@ Fine-tuning of the network resulted in an improvement of 0.04 in local CV tests.
 
 Interestingly, adding a random forest classifier into the ML ensemble resulted in about a 0.01 improvement. Probably this was because the non-linear nature of random forest could pick out some relations the linear classifiers could not, and the random forest predictions were generally less correlated with the others. Ensembling via majority vote from different epochs added an additional 0.01 improvement.
 
-On the last day, I found that decreasing the regularization parameter in the SVC model helped increase the score. One of the submissions did okay on the public leaderboard but would have been first on the private leaderboard.
-Most likely, though, it would have been a lucky submission if chosen. If I had more time, I would have ensembled together more of these modified SVC models to try to get more consistent public/private scores.
+On the last day, I found that decreasing the regularization parameter in the SVC model helped increase the score. One of the submissions was 6th on the public leaderboard but would have been first on the private leaderboard.
+Most likely, though, it would have been a lucky submission if chosen. If I had more time, I would have ensembled together more of these modified SVC models to try to get a more consistent model when tested against the private leaderboard.
 
 ## Scripts
 
