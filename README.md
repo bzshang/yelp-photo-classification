@@ -6,18 +6,18 @@ This document outlines my 4th place solution for the [Kaggle Yelp Restaurant Pho
 
 We fine-tune the pre-trained Inception V3 network provided by mxnet [here](https://github.com/dmlc/mxnet-model-gallery/blob/master/imagenet-1k-inception-v3.md).
 
-We modify the symbol file [here](https://github.com/dmlc/mxnet/blob/master/example/image-classification/symbol_inception-v3.py) by renaming the fully-connected layer and reducing the number of output classes from 1000 to 9 and changing the output to LogisticRegressionOutput which is appropriate for multi-label learning.
+We modify the symbol file [here](https://github.com/dmlc/mxnet/blob/master/example/image-classification/symbol_inception-v3.py) by renaming the fully-connected layer. This prevents mxnet from trying to initialize this layer with pre-trained weights. We also reduce the number of output classes from 1000 to 9 (as there are 9 business labels to predict) and change the output to LogisticRegressionOutput (independent sigmoids) which is appropriate for multi-label learning, as the output probabilties are not constrained to add to 1.
 
-Using this modified architecture, we initialize the model with pre-trained weights, except for the last layer which was modified.
+Using this modified architecture, we initialize the model with pre-trained weights, except for the last layer which was renamed and modified.
 
-We train the network for 5 epochs through the training set, using random crop, mirror, and scaling of the images.
+We train the network for 5 epochs through the training set, using random crop, mirror, and scaling of the images. An AWS Spot instance (g2.2xlarge) was used with cuDNN.
 
 The features (1024 total) from the global_pool layer (next to last) are then extracted.
 
-Business features are the average of their image features.
+Business features were chosen to be the average of their image features.
 
 These features are used as input into classical machine learning (ML) models.
-These include support vector classification, logistic regression, and random forest. We use one-vs-rest methodology for the multi-label problem.
+These models include support vector classification, logistic regression, and random forest. We use one-vs-rest methodology for the multi-label problem.
 
 The class label probabilities from the 3 ML models are averaged and we use a threshold of 0.46 (determined from cross-validation) for selecting a label.
 
