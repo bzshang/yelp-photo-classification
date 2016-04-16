@@ -21,7 +21,7 @@ Business features were chosen to be the average of their image features.
 ### Feed network features into machine learning models
 
 These features are used as input into classical machine learning (ML) models.
-These models include support vector classification, logistic regression, and random forest. We use one-vs-rest methodology for the multi-label problem.
+These models include support vector classification, logistic regression, and random forest. We use one-vs-rest methodology for the multi-label problem. Scikit-learn was used here.
 
 ### Ensemble the predictions
 
@@ -71,3 +71,7 @@ Using the models, generate predictions in test_ml.py. The predictions use the av
 ### 7. Generate ensemble majority vote classifier
 
 After generating predictions from features extracted from different epochs, the script merge_submissions.py generates an majority vote classifier. I found ensembled model scores were generally more reliable, in terms of private/public scores being closer.
+
+## Acknowledgement
+
+I'd like to thank Kaggle for hosting the competition and Yelp for providing the challenge and interesting data set. I also want to give a high recommendation for mxnet. Great performance and ease-of-use.
