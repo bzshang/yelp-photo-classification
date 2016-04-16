@@ -4,6 +4,8 @@ This document outlines my 4th place solution for the [Kaggle Yelp Restaurant Pho
 
 ## Outline
 
+### Fine-tune pre-trained network
+
 We fine-tune the pre-trained Inception V3 network provided by mxnet [here](https://github.com/dmlc/mxnet-model-gallery/blob/master/imagenet-1k-inception-v3.md).
 
 We modify the symbol file [here](https://github.com/dmlc/mxnet/blob/master/example/image-classification/symbol_inception-v3.py) by renaming the fully-connected layer. This prevents mxnet from trying to initialize this layer with pre-trained weights. We also reduce the number of output classes from 1000 to 9 (as there are 9 business labels to predict) and change the output to LogisticRegressionOutput (independent sigmoids) which is appropriate for multi-label learning, as the output probabilties are not constrained to add to 1.
@@ -16,8 +18,12 @@ The features (1024 total) from the global_pool layer (next to last) are then ext
 
 Business features were chosen to be the average of their image features.
 
+### Feed network features into machine learning models
+
 These features are used as input into classical machine learning (ML) models.
 These models include support vector classification, logistic regression, and random forest. We use one-vs-rest methodology for the multi-label problem.
+
+### Ensemble the predictions
 
 The class label probabilities from the 3 ML models are averaged and we use a threshold of 0.46 (determined from cross-validation) for selecting a label.
 
