@@ -12,7 +12,7 @@ Using this modified architecture, we initialize the model with pre-trained weigh
 
 We train the network for 5 epochs through the training set, using random crop, mirror, and scaling of the images.
 
-The features from the fully connected layer (1024 total) are then extracted.
+The features (1024 total) from the global_pool layer (next to last) are then extracted.
 
 Business features are the average of their image features.
 
