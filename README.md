@@ -45,7 +45,7 @@ This part will outline the scripts I used.
 ### 1. Generate the image label and record file
 
 I used the ImageRecordIter from mxnet, which has quite good performance. The record file generator first requires a .lst file which is what create_img_list.py does.
-After creating the .lst file, generate the record file following the steps [here](http://myungjun-youn-demo.readthedocs.org/en/latest/python/io.html). 
+After creating the .lst file, generate the record file following the steps [here](https://mxnet-bing.readthedocs.org/en/latest/python/io.html). 
 Use resize=299 label_width=9.
 
 ### 2.  Train the Inception V3 network
